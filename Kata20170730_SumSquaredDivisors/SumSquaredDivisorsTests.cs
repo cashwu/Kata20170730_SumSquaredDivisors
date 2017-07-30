@@ -38,33 +38,19 @@ namespace Kata20170730_SumSquaredDivisors
     {
         public string listSquared(long m, long n)
         {
-            var sumSquared = new Dictionary<long, long>();
-            if (m == n)
+            return $"[{string.Join(", ", SumOfSquaredDivisor(m, n))}]";
+        }
+
+        private static IEnumerable<string> SumOfSquaredDivisor(long m, long n)
+        {
+            for (; m <= n; m++)
             {
                 var sumOfSquaredDivisor = SquaredOfDivisor(m).Sum();
                 if (SumOfSquaredDivisorCouldBeSqrt(sumOfSquaredDivisor))
                 {
-                    sumSquared.Add(m, sumOfSquaredDivisor);
+                    yield return $"[{m}, {sumOfSquaredDivisor}]";
                 }
             }
-            else
-            {
-                for (; m <= n; m++)
-                {
-                    var sumOfSquaredDivisor = SquaredOfDivisor(m).Sum();
-                    if (SumOfSquaredDivisorCouldBeSqrt(sumOfSquaredDivisor))
-                    {
-                        sumSquared.Add(m, sumOfSquaredDivisor);
-                    }
-                }
-            }
-
-            return $"[{string.Join(", ", sumSquared.Select(kv => $"[{kv.Key}, {kv.Value}]"))}]";
-        }
-
-        private static bool SumOfSquaredDivisorCouldBeSqrt(int sumOfSquared)
-        {
-            return !Math.Sqrt(sumOfSquared).ToString().Contains(".");
         }
 
         private static IEnumerable<int> SquaredOfDivisor(long m)
@@ -76,6 +62,11 @@ namespace Kata20170730_SumSquaredDivisors
                     yield return i * i;
                 }
             }
+        }
+
+        private static bool SumOfSquaredDivisorCouldBeSqrt(int sumOfSquared)
+        {
+            return !Math.Sqrt(sumOfSquared).ToString().Contains(".");
         }
     }
 }
