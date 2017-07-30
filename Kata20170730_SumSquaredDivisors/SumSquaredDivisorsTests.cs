@@ -35,23 +35,30 @@ namespace Kata20170730_SumSquaredDivisors
             var sumSquared = new Dictionary<long, long>();
             if (m == n)
             {
-                var divisor = new List<int>();
-                for (int i = 1; i <= 42; i++)
-                {
-                    if (m % i == 0)
-                    {
-                        divisor.Add(i * i);
-                    }
-                }
-
-                var sumOfSquared = divisor.Sum();
-                if (!Math.Sqrt(sumOfSquared).ToString().Contains("."))
+                var sumOfSquared = Divisor(m).Sum();
+                if (SumOfSquaredDivisorCouldBeSqrt(sumOfSquared))
                 {
                     sumSquared.Add(m, sumOfSquared);
                 }
             }
 
             return $"[[{m}, {sumSquared[m]}]]";
+        }
+
+        private static bool SumOfSquaredDivisorCouldBeSqrt(int sumOfSquared)
+        {
+            return !Math.Sqrt(sumOfSquared).ToString().Contains(".");
+        }
+
+        private static IEnumerable<int> Divisor(long m)
+        {
+            for (var i = 1; i <= 42; i++)
+            {
+                if (m % i == 0)
+                {
+                    yield return i * i;
+                }
+            }
         }
     }
 }
