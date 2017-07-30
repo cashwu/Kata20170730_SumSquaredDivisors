@@ -35,10 +35,10 @@ namespace Kata20170730_SumSquaredDivisors
             var sumSquared = new Dictionary<long, long>();
             if (m == n)
             {
-                var sumOfSquared = Divisor(m).Sum();
-                if (SumOfSquaredDivisorCouldBeSqrt(sumOfSquared))
+                var sumOfSquaredDivisor = SquaredOfDivisor(m).Sum();
+                if (SumOfSquaredDivisorCouldBeSqrt(sumOfSquaredDivisor))
                 {
-                    sumSquared.Add(m, sumOfSquared);
+                    sumSquared.Add(m, sumOfSquaredDivisor);
                 }
             }
 
@@ -50,9 +50,9 @@ namespace Kata20170730_SumSquaredDivisors
             return !Math.Sqrt(sumOfSquared).ToString().Contains(".");
         }
 
-        private static IEnumerable<int> Divisor(long m)
+        private static IEnumerable<int> SquaredOfDivisor(long m)
         {
-            for (var i = 1; i <= 42; i++)
+            for (var i = 1; i <= m; i++)
             {
                 if (m % i == 0)
                 {
