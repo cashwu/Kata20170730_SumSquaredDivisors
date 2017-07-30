@@ -84,7 +84,7 @@ namespace Kata20170730_SumSquaredDivisors
 
         private static bool SumOfSquaredDivisorCouldBeSqrt(int sumOfSquared)
         {
-            return !Math.Sqrt(sumOfSquared).ToString().Contains(".");
+            return Math.Sqrt(sumOfSquared) % 1 == 0;
         }
     }
 }
