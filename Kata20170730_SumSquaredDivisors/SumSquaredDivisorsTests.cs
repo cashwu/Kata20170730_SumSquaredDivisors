@@ -26,6 +26,24 @@ namespace Kata20170730_SumSquaredDivisors
             AssertSumSquaredDivisorsShouldBe(1, 42, "[[1, 1], [42, 2500]]");
         }
 
+        [TestMethod]
+        public void m_1_n_250_should_return_1_1_and_42_2500_and_246_84100()
+        {
+            AssertSumSquaredDivisorsShouldBe(1, 250, "[[1, 1], [42, 2500], [246, 84100]]");
+        }
+
+        [TestMethod]
+        public void m_42_n_250_should_return_42_2500_and_246_84100()
+        {
+            AssertSumSquaredDivisorsShouldBe(42, 250, "[[42, 2500], [246, 84100]]");
+        }
+
+        [TestMethod]
+        public void m_250_n_500_should_return_287_84100()
+        {
+            AssertSumSquaredDivisorsShouldBe(250, 500, "[[287, 84100]]");
+        }
+
         private static void AssertSumSquaredDivisorsShouldBe(long m, long n, string expected)
         {
             var sumSquaredDivisors = new SumSquaredDivisors();
