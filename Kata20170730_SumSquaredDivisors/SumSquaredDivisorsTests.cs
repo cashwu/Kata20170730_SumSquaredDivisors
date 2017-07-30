@@ -20,6 +20,12 @@ namespace Kata20170730_SumSquaredDivisors
             AssertSumSquaredDivisorsShouldBe(42, 42, "[[42, 2500]]");
         }
 
+        [TestMethod]
+        public void m_1_n_42_should_return_1_1_and_42_2500()
+        {
+            AssertSumSquaredDivisorsShouldBe(1, 42, "[[1, 1], [42, 2500]]");
+        }
+
         private static void AssertSumSquaredDivisorsShouldBe(long m, long n, string expected)
         {
             var sumSquaredDivisors = new SumSquaredDivisors();
@@ -41,8 +47,19 @@ namespace Kata20170730_SumSquaredDivisors
                     sumSquared.Add(m, sumOfSquaredDivisor);
                 }
             }
+            else
+            {
+                for (; m <= n; m++)
+                {
+                    var sumOfSquaredDivisor = SquaredOfDivisor(m).Sum();
+                    if (SumOfSquaredDivisorCouldBeSqrt(sumOfSquaredDivisor))
+                    {
+                        sumSquared.Add(m, sumOfSquaredDivisor);
+                    }
+                }
+            }
 
-            return $"[[{m}, {sumSquared[m]}]]";
+            return $"[{string.Join(", ", sumSquared.Select(kv => $"[{kv.Key}, {kv.Value}]"))}]";
         }
 
         private static bool SumOfSquaredDivisorCouldBeSqrt(int sumOfSquared)
