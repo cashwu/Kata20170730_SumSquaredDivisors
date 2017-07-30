@@ -63,7 +63,7 @@ namespace Kata20170730_SumSquaredDivisors
         {
             for (; m <= n; m++)
             {
-                var sumOfSquaredDivisor = SquaredOfDivisor(m);
+                var sumOfSquaredDivisor = SquaredOfDivisor(m).Sum();
                 if (SumOfSquaredDivisorCouldBeSqrt(sumOfSquaredDivisor))
                 {
                     yield return $"[{m}, {sumOfSquaredDivisor}]";
@@ -71,12 +71,18 @@ namespace Kata20170730_SumSquaredDivisors
             }
         }
 
-        private static double SquaredOfDivisor(long m)
+        private static IEnumerable<int> SquaredOfDivisor(long m)
         {
-            return Enumerable.Range(1, (int)m).Select(idx => m % idx == 0 ? Math.Pow(idx, 2) : 0).Sum();
+            for (var i = 1; i <= m; i++)
+            {
+                if (m % i == 0)
+                {
+                    yield return i * i;
+                }
+            }
         }
 
-        private static bool SumOfSquaredDivisorCouldBeSqrt(double sumOfSquared)
+        private static bool SumOfSquaredDivisorCouldBeSqrt(int sumOfSquared)
         {
             return !Math.Sqrt(sumOfSquared).ToString().Contains(".");
         }
